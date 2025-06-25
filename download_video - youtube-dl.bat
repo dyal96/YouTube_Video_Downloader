@@ -25,7 +25,7 @@ if "%url%"=="" (
 :: === Download video (best MP4 quality) ===
 echo.
 echo ⏬ Downloading video...
-"%~dp0%YTDL%" -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o "%%(title)s.%%(ext)s" %url%
+"%~dp0%YTDL%" -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o "out/%%(title)s.%%(ext)s" %url%
 
 echo.
 echo ✅ Done!
