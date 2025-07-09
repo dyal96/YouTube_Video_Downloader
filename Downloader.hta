@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Downloader</title>
+  <hta:application 
+    applicationname="VideoDownloader"
+    scroll="no"
+    border="thin"
+    caption="yes"
+    showintaskbar="yes"
+    singleinstance="yes"
+    windowstate="normal"
+  >
+  <style>
+    body {
+      font-family: Segoe UI, sans-serif;
+      background: #1e1e1e;
+      color: #eee;
+      margin: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+    }
+    button {
+      background-color: #0a84ff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005ecb;
+    }
+    #output {
+      white-space: pre-wrap;
+      background-color: #111;
+      color: #0f0;
+      padding: 10px;
+      border-radius: 6px;
+      height: 200px;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎬 Portable Video Downloader</h2>
+  <label for="url">Enter video URL:</label><br>
+  <input type="text" id="url" placeholder="https://www.youtube.com/watch?v=...">
+  <button onclick="download()">Download</button>
+  <div id="output"></div>
+
+  <script language="VBScript">
+  Sub download()
+    Dim shell, url, command
+    url = document.getElementById("url").value
+    If url = "" Then
+      MsgBox "Please enter a URL!"
+      Exit Sub
+    End If
+
+    Set shell = CreateObject("WScript.Shell")
+    command = "cmd.exe /c mkdir Downloads && yt-dlp.exe -o ""Downloads\%%(title)s.%%(ext)s"" """ & url & """"
+    
+    document.getElementById("output").innerHTML = "Downloading...`nPlease wait..."
+    
+    shell.Run command, 1, True
+
+    document.getElementById("output").innerHTML = document.getElementById("output").innerHTML & "`nDone!"
+  End Sub
+  </script>
+</body>
+</html>
